@@ -4,6 +4,7 @@ import com.digitalhouse.tpfinal.patient.model.domain.Patient;
 import com.digitalhouse.tpfinal.patient.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class DefaultPatientService implements PatientService {
     }
 
     @Override
+    @Transactional
     public void deleteBy( Long id ) {
         repository.deleteBy( id );
     }

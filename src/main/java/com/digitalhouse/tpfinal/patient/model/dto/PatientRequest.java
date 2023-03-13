@@ -4,8 +4,6 @@ import com.digitalhouse.tpfinal.patient.model.domain.Patient;
 
 import java.time.LocalDate;
 
-import static java.time.LocalDate.now;
-
 public record PatientRequest(
         String lastName,
         String firstName,
@@ -19,7 +17,7 @@ public record PatientRequest(
                       .firstName( firstName )
                       .address( address )
                       .dni( dni )
-                      .createdDate( now().toString() )
+                      .createdDate( LocalDate.now().toString() )
                       .build();
     }
 }

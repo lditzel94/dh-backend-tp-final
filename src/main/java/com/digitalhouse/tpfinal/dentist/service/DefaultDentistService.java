@@ -4,6 +4,7 @@ import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
 import com.digitalhouse.tpfinal.dentist.repository.DentistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class DefaultDentistService implements DentistService {
     }
 
     @Override
+    @Transactional
     public void deleteBy( Long license ) {
         repository.deleteBy( license );
     }

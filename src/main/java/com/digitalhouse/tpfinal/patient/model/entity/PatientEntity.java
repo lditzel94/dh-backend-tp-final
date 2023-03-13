@@ -34,4 +34,15 @@ public class PatientEntity {
                       .createdDate( createdDate )
                       .build();
     }
+
+    public static PatientEntity from( Patient patient ) {
+        return new PatientEntity(
+                patient.id(),
+                patient.lastName(),
+                patient.firstName(),
+                patient.address(),
+                patient.dni(),
+                patient.createdDate()
+        );
+    }
 }
