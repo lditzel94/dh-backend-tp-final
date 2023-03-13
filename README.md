@@ -1,4 +1,4 @@
-<img width="500px" src="/home/luciano/Documents/Digital House/Backend I/TP - FINAL/backend-tp-final/src/main/resources/static/CTD.jpg"/>
+<img width="500px" src="src/main/resources/static/CTD.jpg"/>
 
 # Trabajo integrador
 
