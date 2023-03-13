@@ -1,3 +1,5 @@
+package com.digitalhouse.tpfinal.dentist.configuration;
+
 import com.digitalhouse.tpfinal.dentist.model.entity.DentistEntity;
 import com.digitalhouse.tpfinal.dentist.repository.DentistJpaRepository;
 import lombok.RequiredArgsConstructor;
