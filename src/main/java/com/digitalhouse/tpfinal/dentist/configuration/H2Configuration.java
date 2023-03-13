@@ -13,11 +13,12 @@ public class H2Configuration {
     public ApplicationRunner applicationRunner( DentistJpaRepository repository ) {
         return args -> {
             repository.save(
-                    DentistEntity.builder()
-                                 .license( 33333L )
-                                 .firstName( "Luciano" )
-                                 .lastName( "Ditzel" )
-                                 .build()
+                    new DentistEntity(
+                            null,
+                            33333L,
+                            "Ditzel",
+                            "Luciano"
+                    )
             );
         };
     }

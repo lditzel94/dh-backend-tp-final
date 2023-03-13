@@ -1,11 +1,11 @@
 package com.digitalhouse.tpfinal.dentist.service;
 
 import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
-import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.repository.DentistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -14,15 +14,18 @@ public class DefaultDentistService implements DentistService {
     private final DentistRepository repository;
 
     @Override
-    public Dentist create( Dentist dentist ) {
-        return repository.save( dentist )
-                         .orElse( dentist );
+    public Optional<Dentist> create( Dentist dentist ) {
+        return repository.save( dentist );
     }
 
     @Override
-    public Dentist findBy( Long license ) throws DentistNotFoundException {
-        return repository.findBy( license )
-                         .orElseThrow( DentistNotFoundException::new );
+    public Optional<Dentist> findBy( Long license ) {
+        return repository.findBy( license );
+    }
+
+    @Override
+    public List<Dentist> findAll() {
+        return repository.findAll();
     }
 
     @Override
@@ -31,7 +34,7 @@ public class DefaultDentistService implements DentistService {
     }
 
     @Override
-    public Optional<Long> delete( Long license ) {
-        return repository.deleteBy( license );
+    public void delete( Long license ) {
+        repository.deleteBy( license );
     }
 }

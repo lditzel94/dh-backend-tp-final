@@ -1,16 +1,18 @@
 package com.digitalhouse.tpfinal.dentist.service;
 
 import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
-import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface DentistService {
-    Dentist create( Dentist dentist );
+    Optional<Dentist> create( Dentist dentist );
 
-    Dentist findBy( Long license ) throws DentistNotFoundException;
+    Optional<Dentist> findBy( Long license );
+
+    List<Dentist> findAll();
 
     Optional<Dentist> modify( Dentist oldDentist, Dentist newDentist );
 
-    Optional<Long> delete( Long license );
+    void delete( Long license );
 }
