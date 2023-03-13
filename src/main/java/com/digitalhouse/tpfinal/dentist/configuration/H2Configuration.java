@@ -2,19 +2,15 @@ package com.digitalhouse.tpfinal.dentist.configuration;
 
 import com.digitalhouse.tpfinal.dentist.model.entity.DentistEntity;
 import com.digitalhouse.tpfinal.dentist.repository.DentistJpaRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@RequiredArgsConstructor
 public class H2Configuration {
-    private final DentistJpaRepository repository;
-
 
     @Bean
-    public ApplicationRunner applicationRunner() {
+    public ApplicationRunner applicationRunner( DentistJpaRepository repository ) {
         return args -> {
             repository.save(
                     DentistEntity.builder()
