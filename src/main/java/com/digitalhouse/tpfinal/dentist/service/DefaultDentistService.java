@@ -34,7 +34,7 @@ public class DefaultDentistService implements DentistService {
     }
 
     @Override
-    public void delete( Long license ) {
+    public void deleteBy( Long license ) {
         repository.deleteBy( license );
     }
 }

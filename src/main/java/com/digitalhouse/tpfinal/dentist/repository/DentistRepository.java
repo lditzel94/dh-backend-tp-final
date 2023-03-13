@@ -14,7 +14,8 @@ public class DentistRepository {
     private final DentistJpaRepository repository;
 
     public Optional<Dentist> save( Dentist dentist ) {
-        return Optional.empty();
+        return Optional.ofNullable( doSave( dentist ) )
+                       .map( DentistEntity::toDomain );
     }
 
     public Optional<Dentist> findBy( Long license ) {
@@ -31,5 +32,9 @@ public class DentistRepository {
 
     public void deleteBy( Long license ) {
         repository.deleteByLicense( license );
+    }
+
+    private DentistEntity doSave( Dentist dentist ) {
+        return repository.save( DentistEntity.from( dentist ) );
     }
 }

@@ -14,5 +14,5 @@ public interface DentistService {
 
     Optional<Dentist> modify( Dentist oldDentist, Dentist newDentist );
 
-    void delete( Long license );
+    void deleteBy( Long license );
 }

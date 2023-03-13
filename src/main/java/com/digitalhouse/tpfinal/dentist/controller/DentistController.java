@@ -45,6 +45,6 @@ class DentistController {
     @DeleteMapping( "/{license}" )
     @ResponseStatus( NO_CONTENT )
     void delete( @PathVariable Long license ) {
-        service.delete( license );
+        service.deleteBy( license );
     }
 }
