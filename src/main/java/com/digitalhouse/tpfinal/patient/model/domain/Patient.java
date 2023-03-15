@@ -1,5 +1,6 @@
 package com.digitalhouse.tpfinal.patient.model.domain;
 
+import com.digitalhouse.tpfinal.shared.model.Address;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ public record Patient(
         Long id,
         String lastName,
         String firstName,
-        String address, //TODO: refactor to Address object
+        Address address,
         String dni,
         LocalDate createdDate
 ) {

@@ -19,8 +19,11 @@ public class DentistEntity {
     @Id
     @GeneratedValue( strategy = IDENTITY )
     private Long id;
+
     private Long license;
+
     private String lastName;
+
     private String firstName;
 
     public Dentist toDomain() {

@@ -1,13 +1,14 @@
 package com.digitalhouse.tpfinal.patient.model.dto;
 
 import com.digitalhouse.tpfinal.patient.model.domain.Patient;
+import com.digitalhouse.tpfinal.shared.model.Address;
 
 import java.time.LocalDate;
 
 public record PatientRequest(
         String lastName,
         String firstName,
-        String address, //TODO: refactor to Address object
+        Address address,
         String dni
 ) {
 

@@ -4,6 +4,7 @@ import com.digitalhouse.tpfinal.dentist.model.entity.DentistEntity;
 import com.digitalhouse.tpfinal.dentist.repository.DentistJpaRepository;
 import com.digitalhouse.tpfinal.patient.model.entity.PatientEntity;
 import com.digitalhouse.tpfinal.patient.repository.PatientJpaRepository;
+import com.digitalhouse.tpfinal.shared.model.AddressEntity;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,12 +25,13 @@ public class DentistDataLoader {
                             "Luciano"
                     )
             );
+
             patientRepository.save(
                     new PatientEntity(
                             null,
                             "Ditzel",
                             "Agustin",
-                            "Cabildo",
+                            new AddressEntity( null, "Cabildo", 3000 ),
                             "1234",
                             LocalDate.now()
                     )
