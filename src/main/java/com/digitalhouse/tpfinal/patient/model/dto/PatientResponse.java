@@ -3,6 +3,8 @@ package com.digitalhouse.tpfinal.patient.model.dto;
 import com.digitalhouse.tpfinal.patient.model.domain.Patient;
 import lombok.Builder;
 
+import java.time.LocalDate;
+
 @Builder
 public record PatientResponse(
         Long id,
@@ -10,7 +12,7 @@ public record PatientResponse(
         String firstName,
         String address, //TODO: refactor to Address object
         String dni,
-        String createdDate //TODO: refactor to some timestamp type
+        LocalDate createdDate
 ) {
 
     public static PatientResponse from( Patient patient ) {

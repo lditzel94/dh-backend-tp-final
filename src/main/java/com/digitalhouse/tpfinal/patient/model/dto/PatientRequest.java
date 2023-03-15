@@ -17,7 +17,7 @@ public record PatientRequest(
                       .firstName( firstName )
                       .address( address )
                       .dni( dni )
-                      .createdDate( LocalDate.now().toString() )
+                      .createdDate( LocalDate.now() )
                       .build();
     }
 }

@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -22,7 +24,7 @@ public class PatientEntity {
     private String firstName;
     private String address; //TODO: refactor to Address object
     private String dni;
-    private String createdDate;//TODO: refactor to some timestamp type
+    private LocalDate createdDate;
 
     public Patient toDomain() {
         return Patient.builder()

@@ -37,20 +37,9 @@ public class PatientController {
     @PostMapping
     @ResponseStatus( CREATED )
     PatientResponse create( @Valid @RequestBody PatientRequest patientRequest ) throws RuntimeException {
-        PatientResponse response = PatientResponse.builder().build();
-
-        try {
-            var patient = service.create( patientRequest.toDomain() );
-            response = PatientResponse.from( patient.get() );
-        } catch ( Exception e ) {
-            System.out.println( e.getMessage() );
-            e.printStackTrace();
-        }
-
-        return response;
-        //return service.create( patientRequest.toDomain() )
-        //              .map( PatientResponse::from )
-        //              .orElseThrow( RuntimeException::new );
+        return service.create( patientRequest.toDomain() )
+                      .map( PatientResponse::from )
+                      .orElseThrow( RuntimeException::new );
     }
 
     @DeleteMapping( "/{id}" )
