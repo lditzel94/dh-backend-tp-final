@@ -1,10 +1,7 @@
 package com.digitalhouse.tpfinal.dentist.model.entity;
 
 import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -18,9 +15,13 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class DentistEntity {
     @Id
     @GeneratedValue( strategy = IDENTITY )
+    @Column( name = "dentist_id" )
     private Long id;
+
     private Long license;
+
     private String lastName;
+
     private String firstName;
 
     public Dentist toDomain() {
