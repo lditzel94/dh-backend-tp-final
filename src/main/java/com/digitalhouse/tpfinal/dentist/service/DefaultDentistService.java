@@ -20,8 +20,8 @@ public class DefaultDentistService implements DentistService {
     }
 
     @Override
-    public Optional<Dentist> findBy( Long license ) {
-        return repository.findBy( license );
+    public Optional<Dentist> findBy( Long id ) {
+        return repository.findBy( id );
     }
 
     @Override

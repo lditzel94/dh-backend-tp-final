@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface DentistService {
     Optional<Dentist> create( Dentist dentist );
 
-    Optional<Dentist> findBy( Long license );
+    Optional<Dentist> findBy( Long id );
 
     List<Dentist> findAll();
 

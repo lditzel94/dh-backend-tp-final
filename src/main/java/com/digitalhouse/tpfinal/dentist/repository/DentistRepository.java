@@ -18,8 +18,8 @@ public class DentistRepository {
                        .map( DentistEntity::toDomain );
     }
 
-    public Optional<Dentist> findBy( Long license ) {
-        return repository.findByLicense( license )
+    public Optional<Dentist> findBy( Long id ) {
+        return repository.findById( id )
                          .map( DentistEntity::toDomain );
     }
 
@@ -30,8 +30,8 @@ public class DentistRepository {
                          .toList();
     }
 
-    public void deleteBy( Long license ) {
-        repository.deleteByLicense( license );
+    public void deleteBy( Long id ) {
+        repository.deleteById( id );
     }
 
     private DentistEntity doSave( Dentist dentist ) {

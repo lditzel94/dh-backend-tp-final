@@ -6,7 +6,6 @@ import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.service.DentistService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +27,9 @@ class DentistController {
                       .toList();
     }
 
-    @GetMapping( "/{license}" )
-    DentistResponse findBy( @PathVariable Long license ) throws DentistNotFoundException {
-        return service.findBy( license )
+    @GetMapping( "/{id}" )
+    DentistResponse findBy( @PathVariable Long id ) throws DentistNotFoundException {
+        return service.findBy( id )
                       .map( DentistResponse::from )
                       .orElseThrow( DentistNotFoundException::new );
     }
@@ -43,9 +42,9 @@ class DentistController {
                       .orElseThrow( RuntimeException::new );
     }
 
-    @DeleteMapping( "/{license}" )
+    @DeleteMapping( "/{id}" )
     @ResponseStatus( NO_CONTENT )
-    void delete( @PathVariable Long license ) {
-        service.deleteBy( license );
+    void delete( @PathVariable Long id ) {
+        service.deleteBy( id );
     }
 }
