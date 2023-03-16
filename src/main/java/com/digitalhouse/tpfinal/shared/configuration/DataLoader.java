@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 
 @Configuration
-public class DentistDataLoader {
+public class DataLoader {
 
     @Bean
     public ApplicationRunner applicationRunner( DentistJpaRepository dentistRepository, PatientJpaRepository patientRepository ) {
