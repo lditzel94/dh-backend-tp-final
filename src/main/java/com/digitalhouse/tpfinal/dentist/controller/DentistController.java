@@ -1,7 +1,6 @@
 package com.digitalhouse.tpfinal.dentist.controller;
 
-import com.digitalhouse.tpfinal.dentist.model.dto.DentistRequest;
-import com.digitalhouse.tpfinal.dentist.model.dto.DentistResponse;
+import com.digitalhouse.tpfinal.dentist.model.dto.DentistDTO;
 import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.service.DentistService;
 import jakarta.validation.Valid;
@@ -23,26 +22,26 @@ class DentistController {
     private final DentistService service;
 
     @GetMapping
-    List<DentistResponse> findAll() {
+    List<DentistDTO.Response.Public> findAll() {
         log.info( "Finding dentists" );
         return service.findAll()
                       .stream()
-                      .map( DentistResponse::from )
+                      .map( DentistDTO.Response.Public::from )
                       .toList();
     }
 
     @GetMapping( "/{id}" )
-    DentistResponse findBy( @PathVariable Long id ) throws DentistNotFoundException {
+    DentistDTO.Response.Public findBy( @PathVariable Long id ) throws DentistNotFoundException {
         return service.findBy( id )
-                      .map( DentistResponse::from )
+                      .map( DentistDTO.Response.Public::from )
                       .orElseThrow( DentistNotFoundException::new );
     }
 
     @PostMapping
     @ResponseStatus( CREATED )
-    DentistResponse create( @Valid @RequestBody DentistRequest dentistRequest ) throws RuntimeException {
+    DentistDTO.Response.Public create( @Valid @RequestBody DentistDTO.Request.Create dentistRequest ) throws RuntimeException {
         return service.create( dentistRequest.toDomain() )
-                      .map( DentistResponse::from )
+                      .map( DentistDTO.Response.Public::from )
                       .orElseThrow( RuntimeException::new );
     }
 

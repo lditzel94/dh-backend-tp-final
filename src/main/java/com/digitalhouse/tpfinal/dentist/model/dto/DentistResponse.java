@@ -4,6 +4,7 @@ import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
 import lombok.Builder;
 
 @Builder
+@Deprecated(forRemoval = true)
 public record DentistResponse(
         Long id,
         Long license,

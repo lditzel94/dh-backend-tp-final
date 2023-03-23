@@ -2,6 +2,7 @@ package com.digitalhouse.tpfinal.dentist.model.dto;
 
 import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
 
+@Deprecated(forRemoval = true)
 public record DentistRequest(
         Long license,
         String lastName,
