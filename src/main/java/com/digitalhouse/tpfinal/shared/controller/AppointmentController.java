@@ -39,7 +39,7 @@ class AppointmentController {
     ) throws RuntimeException {
         // TODO: Refactor to specific error models
         var dentist = dentistService.findBy( appointmentRequest.dentistId() ).orElseThrow( RuntimeException::new );
-        var patient = patientService.findBy( appointmentRequest.dentistId() ).orElseThrow( RuntimeException::new );
+        var patient = patientService.findBy( appointmentRequest.patientId() ).orElseThrow( RuntimeException::new );
         var appointment = appointmentRequest.toDomain( dentist, patient );
 
         return appointmentService.create( appointment )
