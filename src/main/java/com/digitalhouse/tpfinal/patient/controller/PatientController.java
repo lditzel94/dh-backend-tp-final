@@ -16,6 +16,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RequiredArgsConstructor
 @RequestMapping( "/patients" )
 @RestController
+@CrossOrigin
 public class PatientController {
     private final PatientService service;
 

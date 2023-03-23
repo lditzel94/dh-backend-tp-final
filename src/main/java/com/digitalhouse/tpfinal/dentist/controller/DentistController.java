@@ -6,6 +6,7 @@ import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.service.DentistService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,14 +14,17 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping( "/dentists" )
 @RestController
+@CrossOrigin
 class DentistController {
     private final DentistService service;
 
     @GetMapping
     List<DentistResponse> findAll() {
+        log.info( "Finding dentists" );
         return service.findAll()
                       .stream()
                       .map( DentistResponse::from )
