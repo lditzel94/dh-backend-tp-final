@@ -5,7 +5,6 @@ import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.service.DentistService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping( "/dentists" )
 @RestController
@@ -23,7 +21,6 @@ class DentistController {
 
     @GetMapping
     List<DentistDTO.Response.Public> findAll() {
-        log.info( "Finding dentists" );
         return service.findAll()
                       .stream()
                       .map( DentistDTO.Response.Public::from )
@@ -31,7 +28,7 @@ class DentistController {
     }
 
     @GetMapping( "/{id}" )
-    DentistDTO.Response.Public findBy( @PathVariable Long id ) throws DentistNotFoundException {
+    DentistDTO.Response.Public findBy( @PathVariable Long id ) {
         return service.findBy( id )
                       .map( DentistDTO.Response.Public::from )
                       .orElseThrow( DentistNotFoundException::new );
@@ -39,10 +36,17 @@ class DentistController {
 
     @PostMapping
     @ResponseStatus( CREATED )
-    DentistDTO.Response.Public create( @Valid @RequestBody DentistDTO.Request.Create dentistRequest ) throws RuntimeException {
+    DentistDTO.Response.Public create( @Valid @RequestBody DentistDTO.Request.Create dentistRequest ) {
         return service.create( dentistRequest.toDomain() )
                       .map( DentistDTO.Response.Public::from )
                       .orElseThrow( RuntimeException::new );
+    }
+
+    @PatchMapping
+    DentistDTO.Response.Public update( @RequestBody DentistDTO.Request.Update dentistRequest ) {
+        return service.update( dentistRequest.toDomain() )
+                      .map( DentistDTO.Response.Public::from )
+                      .orElseThrow( DentistNotFoundException::new );
     }
 
     @DeleteMapping( "/{id}" )

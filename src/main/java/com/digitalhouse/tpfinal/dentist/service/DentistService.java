@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DentistService {
-    Optional<Dentist> create( Dentist dentist );
+    List<Dentist> findAll();
 
     Optional<Dentist> findBy( Long id );
 
-    List<Dentist> findAll();
+    Optional<Dentist> create( Dentist dentist );
 
-    Optional<Dentist> modify( Dentist oldDentist, Dentist newDentist );
+    Optional<Dentist> update( Dentist dentist );
 
     void deleteBy( Long license );
 }

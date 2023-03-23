@@ -29,11 +29,20 @@ public enum DentistDTO {
 
         @Builder
         public record Update(
-                @NotNull Long id,
+                @NotNull
+                Long id,
                 Long license,
                 String lastName,
                 String firstName
         ) {
+            public Dentist toDomain() {
+                return Dentist.builder()
+                              .id( id )
+                              .license( license )
+                              .firstName( firstName )
+                              .lastName( lastName )
+                              .build();
+            }
         }
     }
 

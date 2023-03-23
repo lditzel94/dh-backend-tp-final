@@ -1,8 +1,6 @@
 package com.digitalhouse.tpfinal.patient.controller;
 
-import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
-import com.digitalhouse.tpfinal.patient.model.dto.PatientRequest;
-import com.digitalhouse.tpfinal.patient.model.dto.PatientResponse;
+import com.digitalhouse.tpfinal.patient.model.dto.PatientDTO;
 import com.digitalhouse.tpfinal.patient.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,25 +19,33 @@ public class PatientController {
     private final PatientService service;
 
     @GetMapping
-    List<PatientResponse> findAll() {
+    List<PatientDTO.Response.Public> findAll() {
         return service.findAll()
                       .stream()
-                      .map( PatientResponse::from )
+                      .map( PatientDTO.Response.Public::from )
                       .toList();
     }
 
     @GetMapping( "/{id}" )
-    PatientResponse findBy( @PathVariable Long id ) throws DentistNotFoundException {
+    PatientDTO.Response.Public findBy( @PathVariable Long id ) {
         return service.findBy( id )
-                      .map( PatientResponse::from )
-                      .orElseThrow( DentistNotFoundException::new );
+                      .map( PatientDTO.Response.Public::from )
+                      .orElseThrow( RuntimeException::new );
     }
 
     @PostMapping
     @ResponseStatus( CREATED )
-    PatientResponse create( @Valid @RequestBody PatientRequest patientRequest ) throws RuntimeException {
+    PatientDTO.Response.Public create( @Valid @RequestBody
+                                       PatientDTO.Request.Create patientRequest ) {
         return service.create( patientRequest.toDomain() )
-                      .map( PatientResponse::from )
+                      .map( PatientDTO.Response.Public::from )
+                      .orElseThrow( RuntimeException::new );
+    }
+
+    @PatchMapping
+    PatientDTO.Response.Public update( @RequestBody PatientDTO.Request.Update patientRequest ) {
+        return service.update( patientRequest.toDomain() )
+                      .map( PatientDTO.Response.Public::from )
                       .orElseThrow( RuntimeException::new );
     }
 
