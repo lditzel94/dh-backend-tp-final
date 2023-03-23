@@ -1,7 +1,6 @@
 package com.digitalhouse.tpfinal.patient.model.dto;
 
 import com.digitalhouse.tpfinal.patient.model.domain.Patient;
-import com.digitalhouse.tpfinal.shared.model.Address;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -11,17 +10,18 @@ public record PatientResponse(
         Long id,
         String lastName,
         String firstName,
-        Address address,
+        String address,
         String dni,
         LocalDate createdDate
 ) {
 
     public static PatientResponse from( Patient patient ) {
+        var address = String.format( "%s, %d", patient.address().street(), patient.address().number() );
         return PatientResponse.builder()
                               .id( patient.id() )
                               .lastName( patient.lastName() )
                               .firstName( patient.firstName() )
-                              .address( patient.address() )
+                              .address( address )
                               .dni( patient.dni() )
                               .createdDate( patient.createdDate() )
                               .build();

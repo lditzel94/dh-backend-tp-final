@@ -1,6 +1,6 @@
 package com.digitalhouse.tpfinal.patient.model.domain;
 
-import com.digitalhouse.tpfinal.shared.model.Address;
+import com.digitalhouse.tpfinal.shared.model.domain.Address;
 import lombok.Builder;
 
 import java.time.LocalDate;

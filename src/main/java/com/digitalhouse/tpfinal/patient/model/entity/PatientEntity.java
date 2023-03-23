@@ -1,7 +1,7 @@
 package com.digitalhouse.tpfinal.patient.model.entity;
 
 import com.digitalhouse.tpfinal.patient.model.domain.Patient;
-import com.digitalhouse.tpfinal.shared.model.AddressEntity;
+import com.digitalhouse.tpfinal.shared.model.entity.AddressEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

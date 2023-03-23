@@ -1,5 +1,6 @@
-package com.digitalhouse.tpfinal.shared.model;
+package com.digitalhouse.tpfinal.shared.model.entity;
 
+import com.digitalhouse.tpfinal.shared.model.domain.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

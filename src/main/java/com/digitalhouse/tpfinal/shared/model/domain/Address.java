@@ -1,4 +1,4 @@
-package com.digitalhouse.tpfinal.shared.model;
+package com.digitalhouse.tpfinal.shared.model.domain;
 
 import lombok.Builder;
 
