@@ -6,6 +6,7 @@ import lombok.Builder;
 import java.time.LocalDate;
 
 @Builder
+@Deprecated(forRemoval = true)
 public record PatientResponse(
         Long id,
         String lastName,

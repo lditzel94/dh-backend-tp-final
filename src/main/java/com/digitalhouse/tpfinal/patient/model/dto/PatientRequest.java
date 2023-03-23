@@ -5,6 +5,7 @@ import com.digitalhouse.tpfinal.shared.model.domain.Address;
 
 import java.time.LocalDate;
 
+@Deprecated(forRemoval = true)
 public record PatientRequest(
         String lastName,
         String firstName,
