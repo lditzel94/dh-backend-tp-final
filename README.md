@@ -1,5 +1,12 @@
 <img width="500px" src="src/main/resources/static/CTD.jpg"/>
 
+## Run the application
+
+```
+docker build -t appointments-app .
+docker run -p 8080:8080 appointments-app
+```
+
 # Trabajo integrador
 
 ## Sistema de reserva de turnos
@@ -79,3 +86,5 @@ de los controllers) y la integración con la capa de presentación, o sea las pa
 Queda lo más sencillo para el final. Con los conocimientos adquiridos en la clase 43 podrás agregarle muy fácilmente a
 tu proyecto un login con Spring Security.
 Entrega clase 48. Tendrás tiempo durante todo el día para entregar hasta las 23:59 horas.
+
+
