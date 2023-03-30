@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RequiredArgsConstructor
-@RequestMapping( "/dentists" )
+@RequestMapping( "/api/dentists" )
 @RestController
 @CrossOrigin
 class DentistController {

@@ -53,7 +53,6 @@ class DefaultDentistServiceTest {
 
     @Nested
     @DisplayName( "Find by id" )
-    @Disabled
     class FindById {
         @Test
         @DisplayName( "Record found" )

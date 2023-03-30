@@ -14,7 +14,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RequiredArgsConstructor
-@RequestMapping( "/appointments" )
+@RequestMapping( "/api/appointments" )
 @RestController
 @CrossOrigin
 class AppointmentController {
