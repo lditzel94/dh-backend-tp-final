@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -21,16 +23,18 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain( HttpSecurity http ) throws Exception {
-        http.authorizeHttpRequests()
-            .requestMatchers( "/api/" ).hasAnyRole( "USER", "ADMIN" )
-            .requestMatchers( "/swagger-ui.html" ).hasRole( "ADMIN" )
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .and()
-            .httpBasic();
-        http.csrf().disable();
-        return http.build();
+        return http
+                .authorizeHttpRequests( auth -> auth
+                        .requestMatchers( "/api/**" ).hasAnyRole( "ADMIN", "USER" )
+                        .requestMatchers( "/swagger-ui.html" ).hasRole( "ADMIN" )
+                        .requestMatchers( toH2Console() ).hasRole( "ADMIN" )
+                        .anyRequest().authenticated()
+                )
+                .csrf().ignoringRequestMatchers( toH2Console() ).and()
+                .headers( headers -> headers.frameOptions().disable() )
+                .formLogin().and()
+                .httpBasic().and()
+                .build();
     }
 
     @Bean
@@ -42,8 +46,10 @@ public class SecurityConfiguration {
                                 .build() );
         manager.createUser( User.withUsername( "admin" )
                                 .password( bCryptPasswordEncoder.encode( "password" ) )
-                                .roles( "USER", "ADMIN" )
+                                .roles( "ADMIN" )
                                 .build() );
         return manager;
     }
+
+
 }
