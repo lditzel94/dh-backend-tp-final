@@ -14,9 +14,7 @@ docker build -t appointments-app .
 docker run -p 8080:8080 appointments-app
 ```
 
-### Navigate access the swagger ui
-
-```http://localhost:8080/swagger-ui/index.html ```
+### Navigate access the swagger ui `http://localhost:8080/swagger-ui/index.html `
 
 ### Signup URL is set at `/api/auth/signup`
 
