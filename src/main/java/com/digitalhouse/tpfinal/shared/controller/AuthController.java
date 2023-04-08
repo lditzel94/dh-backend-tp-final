@@ -3,6 +3,7 @@ package com.digitalhouse.tpfinal.shared.controller;
 import com.digitalhouse.tpfinal.shared.model.dto.AuthRequest;
 import com.digitalhouse.tpfinal.shared.model.error.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -20,6 +21,18 @@ public class AuthController {
     @PostMapping( "/signup" )
     @ResponseStatus( CREATED )
     public void register( @RequestBody AuthRequest authRequest ) throws UserAlreadyExistsException {
+        if ( inMemory.userExists( authRequest.username() ) ) throw new UserAlreadyExistsException( "User already exists" );
+
+        inMemory.createUser( User.withUsername( authRequest.username() )
+                                 .password( passwordEncoder.encode( authRequest.password() ) )
+                                 .roles( "USER" )
+                                 .build() );
+    }
+
+    @PostMapping( "/signup-admin" )
+    @ResponseStatus( CREATED )
+    @PreAuthorize( "hasRole(ADMIN)" )
+    public void registerAdmin( @RequestBody AuthRequest authRequest ) {
         if ( inMemory.userExists( authRequest.username() ) ) throw new UserAlreadyExistsException( "User already exists" );
 
         inMemory.createUser( User.withUsername( authRequest.username() )
