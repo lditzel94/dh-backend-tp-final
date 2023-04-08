@@ -16,7 +16,6 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RequiredArgsConstructor
 @RequestMapping( "/api/dentists" )
 @RestController
-@CrossOrigin
 class DentistController {
     private final DentistService service;
 
