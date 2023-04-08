@@ -3,6 +3,7 @@ package com.digitalhouse.tpfinal.dentist.controller;
 import com.digitalhouse.tpfinal.dentist.model.dto.DentistDTO;
 import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.service.DentistService;
+import com.digitalhouse.tpfinal.shared.model.error.ServerError;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ class DentistController {
     DentistDTO.Response.Public create( @Valid @RequestBody DentistDTO.Request.Create dentistRequest ) {
         return service.create( dentistRequest.toDomain() )
                       .map( DentistDTO.Response.Public::from )
-                      .orElseThrow( RuntimeException::new );
+                      .orElseThrow( ServerError::new );
     }
 
     @PatchMapping

@@ -1,9 +1,12 @@
 package com.digitalhouse.tpfinal.shared.controller;
 
+import com.digitalhouse.tpfinal.dentist.model.error.DentistNotFoundException;
 import com.digitalhouse.tpfinal.dentist.service.DentistService;
+import com.digitalhouse.tpfinal.patient.model.error.PatientNotFoundException;
 import com.digitalhouse.tpfinal.patient.service.PatientService;
 import com.digitalhouse.tpfinal.shared.model.dto.AppointmentRequest;
 import com.digitalhouse.tpfinal.shared.model.dto.AppointmentResponse;
+import com.digitalhouse.tpfinal.shared.model.error.ServerError;
 import com.digitalhouse.tpfinal.shared.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,13 +40,12 @@ class AppointmentController {
             @RequestBody
             AppointmentRequest appointmentRequest
     ) throws RuntimeException {
-        // TODO: Refactor to specific error models
-        var dentist = dentistService.findBy( appointmentRequest.dentistId() ).orElseThrow( RuntimeException::new );
-        var patient = patientService.findBy( appointmentRequest.patientId() ).orElseThrow( RuntimeException::new );
+        var dentist = dentistService.findBy( appointmentRequest.dentistId() ).orElseThrow( DentistNotFoundException::new );
+        var patient = patientService.findBy( appointmentRequest.patientId() ).orElseThrow( PatientNotFoundException::new );
         var appointment = appointmentRequest.toDomain( dentist, patient );
 
         return appointmentService.create( appointment )
                                  .map( AppointmentResponse::from )
-                                 .orElseThrow( RuntimeException::new );
+                                 .orElseThrow( ServerError::new );
     }
 }

@@ -1,7 +1,9 @@
 package com.digitalhouse.tpfinal.patient.controller;
 
 import com.digitalhouse.tpfinal.patient.model.dto.PatientDTO;
+import com.digitalhouse.tpfinal.patient.model.error.PatientNotFoundException;
 import com.digitalhouse.tpfinal.patient.service.PatientService;
+import com.digitalhouse.tpfinal.shared.model.error.ServerError;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,7 @@ public class PatientController {
     PatientDTO.Response.Public findBy( @PathVariable Long id ) {
         return service.findBy( id )
                       .map( PatientDTO.Response.Public::from )
-                      .orElseThrow( RuntimeException::new );
+                      .orElseThrow( PatientNotFoundException::new );
     }
 
     @PostMapping
@@ -39,14 +41,14 @@ public class PatientController {
                                        PatientDTO.Request.Create patientRequest ) {
         return service.create( patientRequest.toDomain() )
                       .map( PatientDTO.Response.Public::from )
-                      .orElseThrow( RuntimeException::new );
+                      .orElseThrow( ServerError::new );
     }
 
     @PatchMapping
     PatientDTO.Response.Public update( @RequestBody PatientDTO.Request.Update patientRequest ) {
         return service.update( patientRequest.toDomain() )
                       .map( PatientDTO.Response.Public::from )
-                      .orElseThrow( RuntimeException::new );
+                      .orElseThrow( PatientNotFoundException::new );
     }
 
     @DeleteMapping( "/{id}" )

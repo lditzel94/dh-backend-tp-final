@@ -4,6 +4,7 @@ import com.digitalhouse.tpfinal.dentist.model.domain.Dentist;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -12,7 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table( name = "DENTIST" )
 @NoArgsConstructor
 @AllArgsConstructor
-public class DentistEntity {
+public class DentistEntity extends JdbcUserDetailsManager {
     @Id
     @GeneratedValue( strategy = IDENTITY )
     @Column( name = "dentist_id" )

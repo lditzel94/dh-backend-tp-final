@@ -4,10 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
@@ -25,12 +27,18 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain( HttpSecurity http ) throws Exception {
         return http
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers( "/api/**" ).hasAnyRole( "ADMIN", "USER" )
-                        .requestMatchers( "/swagger-ui.html" ).hasRole( "ADMIN" )
+                        .requestMatchers( "/api/auth/**" ).permitAll()
+                        .requestMatchers( "/api/dentists/**" ).hasRole( "ADMIN" )
+                        .requestMatchers( "/api/patients/**", "/api/appointments/**" ).authenticated()
+                        .requestMatchers( "/swagger-ui/**" ).permitAll()
                         .requestMatchers( toH2Console() ).hasRole( "ADMIN" )
-                        .anyRequest().authenticated()
+
                 )
-                .csrf().ignoringRequestMatchers( toH2Console() ).and()
+                .csrf( csrf -> csrf
+                        .ignoringRequestMatchers( toH2Console() )
+                        .ignoringRequestMatchers( "/api/**" )
+                        .ignoringRequestMatchers( "/swagger-ui/**" )
+                )
                 .headers( headers -> headers.frameOptions().disable() )
                 .formLogin().and()
                 .httpBasic().and()
@@ -38,7 +46,14 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService( BCryptPasswordEncoder bCryptPasswordEncoder ) {
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> {
+            web.ignoring().requestMatchers( "/swagger-ui/**", "/v3/api-docs/**" );
+        };
+    }
+
+    @Bean
+    public UserDetailsManager userDetailsService( BCryptPasswordEncoder bCryptPasswordEncoder ) {
         var manager = new InMemoryUserDetailsManager();
         manager.createUser( User.withUsername( "user" )
                                 .password( bCryptPasswordEncoder.encode( "password" ) )
@@ -50,6 +65,4 @@ public class SecurityConfiguration {
                                 .build() );
         return manager;
     }
-
-
 }
