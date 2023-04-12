@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  dental-clinic:
+    container_name: dental-clinic
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-server
+  mysql-server:
+    container_name: mysql
+    image: mysql:8.0.32
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=dental-clinic
+    ports:
+      - "3307:3306"

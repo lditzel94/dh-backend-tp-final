@@ -39,8 +39,6 @@ public class SecurityConfiguration {
                         .ignoringRequestMatchers( "/swagger-ui/**" )
                 )
                 .headers( headers -> headers.frameOptions().disable() )
-                .formLogin().and()
-                .logout().invalidateHttpSession( true ).and()
                 .httpBasic().and()
                 .build();
     }
