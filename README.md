@@ -14,15 +14,17 @@ docker build -t appointments-app .
 docker run -p 8080:8080 appointments-app
 ```
 
-### Navigate access the swagger ui
+### Navigate access the swagger ui 
+`http://localhost:8080/swagger-ui/index.html `
 
-```http://localhost:8080/swagger-ui/index.html ```
+### Signup URL is set at 
+`/api/auth/signup`
 
-### Signup URL is set at `/api/auth/signup`
+### Login URL is set at 
+`/login`
 
-### Login URL is set at `/login`
-
-### Logout URL is set at `/logout`
+### Logout URL is set at 
+`/logout`
 
 # Trabajo integrador
 
